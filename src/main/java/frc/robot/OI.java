@@ -7,7 +7,7 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Joystick;
+//import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 
 /**
@@ -15,6 +15,6 @@ import edu.wpi.first.wpilibj.XboxController;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-  //public XboxController xbox = new XboxController(1);
-  public Joystick stick = new Joystick(0);
+  public XboxController xbox = new XboxController(0);
+  // public Joystick stick = new Joystick(0);
 }

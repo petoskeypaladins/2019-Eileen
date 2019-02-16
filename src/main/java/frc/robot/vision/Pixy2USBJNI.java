@@ -42,8 +42,8 @@ public class Pixy2USBJNI implements Runnable {
         pixy2USBJNI = new Pixy2USBJNI();
         pixy2USBJNI.pixy2USBInit();
         pixy2USBJNI.pixy2USBGetVersion();
-        pixy2USBJNI.pixy2USBLampOn();
-        lampOn = true;
+        //pixy2USBJNI.pixy2USBLampOn();
+        //lampOn = true;
 
         pixy2USBJNI.pixy2USBStartCameraServer();
 
