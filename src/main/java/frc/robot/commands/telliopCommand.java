@@ -27,8 +27,8 @@ public class telliopCommand extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-  Robot.m_subsystem.rightMotor2.setInverted(true);
-  Robot.m_subsystem.rightMotor1.setInverted(true);
+  // Robot.m_subsystem.leftMotor2.setInverted(true);
+  // Robot.m_subsystem.leftMotor1.setInverted(true);
   
   // setInverted​(boolean isInverted)
   }
