@@ -22,7 +22,7 @@ public class CrawlSubsystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   public TalonSRX crawlMotor = new TalonSRX(RobotMap.CRAWL_MOTOR);
-  public Solenoid crawlLatch = new Solenoid(RobotMap.CRAWL_SOLENOID);
+  public Solenoid crawlLatch = new Solenoid(RobotMap.CRAWL_SOLENOID_OUT);
 
   @Override
   public void initDefaultCommand() {

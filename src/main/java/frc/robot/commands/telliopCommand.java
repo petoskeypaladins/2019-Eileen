@@ -42,15 +42,33 @@ public class telliopCommand extends Command {
     // }
     // if(Robot.m_oi.stick.getRawAxis(2)>0.1||Robot.m_oi.stick.getRawAxis(2)<-0.1)
     // Robot.m_subsystem.center.set(-Robot.m_oi.stick.getRawAxis(2));else{Robot.m_subsystem.center.set(0);}    
-    double rightThrottle = -Robot.m_oi.xbox.getY(Hand.kRight);
-    double leftThrottle = Robot.m_oi.xbox.getX(Hand.kLeft);
+    double rightThrottle = Robot.m_oi.xbox.getX(Hand.kRight);
+    double leftThrottle = Robot.m_oi.xbox.getY(Hand.kLeft);
     rightThrottle = rightThrottle*Math.abs(rightThrottle);
     leftThrottle = leftThrottle*Math.abs(leftThrottle);
-    driveTrain.arcadeDrive(.7*rightThrottle, .5*leftThrottle);
+    driveTrain.arcadeDrive(.7*leftThrottle, .5*rightThrottle);
   
     double strafeLeft = Robot.m_oi.xbox.getTriggerAxis(Hand.kLeft);
     double strafeRight = Robot.m_oi.xbox.getTriggerAxis(Hand.kRight);
     Robot.m_subsystem.center.set(.7*(strafeLeft-strafeRight));
+
+
+    Robot.liftSubsystem.moveLiftMech(Robot.m_oi.stick.getY());
+    
+    double rollerSpeed = 0;
+    if (Robot.m_oi.stick.getRawButton(1))
+    rollerSpeed = .8;
+    else if (Robot.m_oi.stick.getRawButton(2))
+      rollerSpeed = -.8;
+    Robot.intakeSubsystem.rollerSpin(rollerSpeed);
+
+
+    double armspeed = 0;
+    if (Robot.m_oi.stick.getRawButton(11))
+      armspeed = .25;
+    else if (Robot.m_oi.stick.getRawButton(12))
+      armspeed = -.2;
+    Robot.intakeSubsystem.armMove(armspeed);
 
   }
 

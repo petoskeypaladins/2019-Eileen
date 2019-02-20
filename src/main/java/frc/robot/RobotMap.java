@@ -24,12 +24,29 @@ public class RobotMap {
   // LiftSubsystem
   public static final int LIFT_MOTOR = 13;
 
-  // CrawlSubsystem
   public static final int CRAWL_MOTOR = 12;
-  public static final int CRAWL_SOLENOID = 0;
 
   // IntakeSubsystem
   public static final int INTAKE_ARM_MOTOR = 3;
   public static final int INTAKE_ROLLER_MOTOR = 4;
+
+  //Solenoids
+  public static final int CRAWL_SOLENOID_OUT = 6;
+  public static final int CRAWL_SOLENOID_IN = 7;
+  public static final int PIN_SOLENOID_OUT = 1;
+  public static final int PIN_SOLENOID_IN = 0;
+  public static final int PIN_SOLENOID_PCM = 1;
+  //hatch solenoids
+  public static final int HATCH_SOLENOID_OUT = 7;
+  public static final int HATCH_SOLENOID_IN = 6;
+  public static final int HATCH_SOLENOID_PCM = 1;
+  
+  public static final int SHIFT_SOLENOID_OUT = 6;
+  public static final int SHIFT_SOLENOID_IN = 7;
+  public static final int SHIFT_SOLENOID_PCM = 0;
+  //DIO
+  public static final int LIFT_ZERO = 1;
+
+
   
 }

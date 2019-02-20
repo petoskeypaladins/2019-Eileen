@@ -7,36 +7,41 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-
-import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
+import frc.robot.commands.telliopCommand;
 
 /**
  * Add your docs here.
  */
-public class LiftSubsystem extends Subsystem {
+public class HatchSubsystem extends Subsystem {
+  public DoubleSolenoid hatch = new DoubleSolenoid(RobotMap.HATCH_SOLENOID_PCM,RobotMap.HATCH_SOLENOID_IN, RobotMap.HATCH_SOLENOID_OUT);
+  public DoubleSolenoid pin = new DoubleSolenoid(RobotMap.PIN_SOLENOID_PCM, RobotMap.PIN_SOLENOID_IN, RobotMap.PIN_SOLENOID_OUT);
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  TalonSRX liftMotor = new TalonSRX(RobotMap.LIFT_MOTOR);
-  DigitalInput liftdown = new DigitalInput(RobotMap.LIFT_ZERO);
- 
+
 
   @Override
   public void initDefaultCommand() {
+  }
+    public void HatchOut() {
+      hatch.set(DoubleSolenoid.Value.kForward);
+
+ }
+    public void HatchIn() {
+      hatch.set(DoubleSolenoid.Value.kReverse);
+
+    }
+    public void PinOut() {
+      pin.set(DoubleSolenoid.Value.kForward);
+
+    }
+    public void PinIn() {
+      pin.set(DoubleSolenoid.Value.kReverse);
+
+    }
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
-  public void moveLiftMech(double speed){
-    SmartDashboard.putBoolean("Limit switch value", liftdown.get());
-    if (liftdown.get()==false && speed < 0)
-      liftMotor.set(ControlMode.PercentOutput, 0);
-    else 
-      liftMotor.set(ControlMode.PercentOutput, speed);
 
-    
-  }
-}

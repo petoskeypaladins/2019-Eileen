@@ -17,8 +17,9 @@ import frc.robot.RobotMap;
  * Add your docs here.
  */
 public class IntakeSubsystem extends Subsystem {
-  public TalonSRX arm = new TalonSRX(RobotMap.INTAKE_ARM_MOTOR);
-  public TalonSRX roller = new TalonSRX(RobotMap.INTAKE_ROLLER_MOTOR);   
+  TalonSRX arm = new TalonSRX(RobotMap.INTAKE_ARM_MOTOR);
+  TalonSRX roller = new TalonSRX(RobotMap.INTAKE_ROLLER_MOTOR);
+     
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
@@ -32,6 +33,6 @@ public class IntakeSubsystem extends Subsystem {
   }
 
   public void armMove( double speed){
-    arm.set(ControlMode.PercentOutput, .05 );
+    arm.set(ControlMode.PercentOutput, speed );
   }
 }

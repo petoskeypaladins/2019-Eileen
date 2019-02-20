@@ -13,6 +13,9 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.TogglePixy2LampCommand;
+import frc.robot.subsystems.HatchSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.LiftSubsystem;
 import frc.robot.subsystems.chassisSubsystem;
 import frc.robot.vision.Pixy2USBJNI;
 
@@ -27,6 +30,9 @@ public class Robot extends TimedRobot {
   public static final Pixy2USBJNI pixy2USBJNI = new Pixy2USBJNI();
   public static chassisSubsystem m_subsystem = new chassisSubsystem();
   public static OI m_oi;
+  public static HatchSubsystem hatchSubsystem = new HatchSubsystem();
+  public static LiftSubsystem liftSubsystem = new LiftSubsystem();
+  public static IntakeSubsystem intakeSubsystem = new IntakeSubsystem(); 
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
