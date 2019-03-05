@@ -1,6 +1,8 @@
 package frc.robot.vision;
 
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.Scanner;
+import java.util.concurrent.ArrayBlockingQueue;
 
 import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
@@ -24,6 +26,17 @@ public class Pixy2USBJNI implements Runnable {
     private void pixy2USBInitCameraServer(CvSource source) {
         pixy2USBInitCameraServer(source.getHandle());
     }
+
+    private native String pixy2USBGetBlocks();
+
+    private static Block[] blocks;
+    public static final ArrayBlockingQueue<Block[]> blocksBuffer = new ArrayBlockingQueue<>(2);
+
+    // private double m_expirationTime;
+    // private final int m_notifier = NotifierJNI.initializeNotifier();
+    // private final double m_period = .05; //Milliseconds?
+
+    private int cycleCounter = 0;
 
     // Return value is status of PutFrame
     private native int pixy2USBLoopCameraServer();
@@ -72,9 +85,78 @@ public class Pixy2USBJNI implements Runnable {
                     toggleLamp.set(false);
                 }
                 pixy2USBJNI.pixy2USBLoopCameraServer();
+                pixy2USBJNI.loopfunc(); // Blocks too
             }
         } else {
             System.err.println("WARNING: is the Pixy2 plugged in???");
         }
     }
+
+
+
+    private void loopfunc() {
+        String visionStuffs = pixy2USBJNI.pixy2USBGetBlocks();
+
+        if (visionStuffs.equals("")) {
+            if (++cycleCounter > 100) {
+                cycleCounter = 0;
+                System.out.println("[INFO] No blocks detected");
+            }
+        return;
+        }
+
+        // Reset counter if there are blocks present
+        cycleCounter = 0;
+
+        String[] visionParts = visionStuffs.split("\n");
+        blocks = new Block[visionParts.length];
+        
+        int arrayIndex = 0;
+        
+        for (String s : visionParts) {
+        
+            if(!s.isEmpty() && !s.isBlank() && !s.equals(null) && !s.equals("")) {
+                try{
+                    Scanner sc = new Scanner(s);
+                    sc.next();
+                    sc.next();
+                    sc.next();
+                    sc.next();
+                    int sig = sc.nextInt();
+                    sc.next();
+                    int x = sc.nextInt();
+                    sc.next();
+                    int y = sc.nextInt();
+                    sc.next();
+                    int width = sc.nextInt();
+                    sc.next();
+                    int height = sc.nextInt();
+                    sc.next();
+                    int index = sc.nextInt();
+                    sc.next();
+                    int age = sc.nextInt();
+
+                    if (sig == 1) // capture signature #1 items
+                    blocks[arrayIndex++] = new Block(sig, x, y, width, height, index, age);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        for (Block b: blocks){
+        System.out.println(b.toString());
+        }
+        synchronized(blocksBuffer) {
+            if(blocksBuffer.remainingCapacity()==0) {
+                blocksBuffer.remove();
+            }
+            try {
+                blocksBuffer.put(blocks);
+            } catch (InterruptedException e){
+                e.printStackTrace();
+            }
+        }
+    }
+
 }
