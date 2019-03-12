@@ -20,17 +20,18 @@ public class OI {
   public XboxController xbox = new XboxController(0);
   public Joystick stick = new Joystick(1);
   
-  //button behavoirs
+  //button behaviors
   public Button pinInBtn = new JoystickButton(stick, 5);
   public Button pinOutBtn = new JoystickButton(stick, 6);
   public Button hatchInBtn = new JoystickButton(stick, 3);
   public Button hatchOutBtn = new JoystickButton(stick, 4);
-
+  public Button hatchRocketBtn = new JoystickButton(stick, 2);
 public OI(){
   pinInBtn.whenPressed(new RetractPinCommand());
   pinOutBtn.whenPressed(new ExtendPinCommand());
   hatchInBtn.whenPressed(new RetractHatchCommand());
   hatchOutBtn.whenPressed(new ExtendHatchCommand());
+  hatchRocketBtn.whenPressed(new DropHatchRocketCommandGroup());
 
   }
 }

@@ -9,6 +9,8 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
+
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
@@ -22,6 +24,7 @@ public class chassisSubsystem extends Subsystem {
   public CANSparkMax center = new CANSparkMax(RobotMap.H_MOTOR, CANSparkMaxLowLevel.MotorType.kBrushless);
   public SpeedControllerGroup left = new SpeedControllerGroup(leftMotor1 , leftMotor2) ;
   public SpeedControllerGroup right = new SpeedControllerGroup(rightMotor1 , rightMotor2) ;
+  public DoubleSolenoid shifter = new DoubleSolenoid(RobotMap.SHIFT_SOLENOID_PCM, RobotMap.SHIFT_SOLENOID_OUT, RobotMap.SHIFT_SOLENOID_IN);
 
   // Put methods for controlling this subsystem
   // here. Call these from Commands.

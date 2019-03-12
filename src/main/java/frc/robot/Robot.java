@@ -17,7 +17,7 @@ import frc.robot.subsystems.HatchSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LiftSubsystem;
 import frc.robot.subsystems.chassisSubsystem;
-import frc.robot.vision.Pixy2USBJNI;
+// import frc.robot.vision.Pixy2USBJNI;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -27,7 +27,7 @@ import frc.robot.vision.Pixy2USBJNI;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static final Pixy2USBJNI pixy2USBJNI = new Pixy2USBJNI();
+  // public static final Pixy2USBJNI pixy2USBJNI = new Pixy2USBJNI();
   public static chassisSubsystem m_subsystem = new chassisSubsystem();
   public static OI m_oi;
   public static HatchSubsystem hatchSubsystem = new HatchSubsystem();
@@ -43,9 +43,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    Thread pixy2USBThread = new Thread(pixy2USBJNI);
-    pixy2USBThread.setDaemon(true);
-    pixy2USBThread.start();
+    // Thread pixy2USBThread = new Thread(pixy2USBJNI);
+    // pixy2USBThread.setDaemon(true);
+    // pixy2USBThread.start();
     m_oi = new OI();
     // m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());

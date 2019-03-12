@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
@@ -54,7 +55,8 @@ public class telliopCommand extends Command {
 
 
     Robot.liftSubsystem.moveLiftMech(Robot.m_oi.stick.getY());
-    
+    if(Robot.m_oi.xbox.getXButtonPressed()) Robot.m_subsystem.shifter.set(Value.kForward);
+    if(Robot.m_oi.xbox.getBButtonPressed()) Robot.m_subsystem.shifter.set(Value.kReverse);
     double rollerSpeed = 0;
     if (Robot.m_oi.stick.getRawButton(1))
     rollerSpeed = .8;

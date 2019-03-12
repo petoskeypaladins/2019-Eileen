@@ -8,11 +8,9 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
 
-public class TogglePixy2LampCommand extends Command {
-
-  public TogglePixy2LampCommand() {
+public class WaitCommand extends Command {
+  public WaitCommand() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -20,8 +18,6 @@ public class TogglePixy2LampCommand extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    System.out.println("Initialize Toggle...");
-    // Robot.pixy2USBJNI.toggleLamp.set(true);
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -32,7 +28,7 @@ public class TogglePixy2LampCommand extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return false;
   }
 
   // Called once after isFinished returns true
