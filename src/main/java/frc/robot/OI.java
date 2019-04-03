@@ -21,17 +21,22 @@ public class OI {
   public Joystick stick = new Joystick(1);
   
   //button behaviors
-  public Button pinInBtn = new JoystickButton(stick, 5);
-  public Button pinOutBtn = new JoystickButton(stick, 6);
+  // public Button pinInBtn = new JoystickButton(stick, 5);
+  // public Button pinOutBtn = new JoystickButton(stick, 6);
   public Button hatchInBtn = new JoystickButton(stick, 3);
-  public Button hatchOutBtn = new JoystickButton(stick, 4);
-  public Button hatchRocketBtn = new JoystickButton(stick, 2);
+  public Button hatchOutBtn = new JoystickButton(stick, 5);
+  public Button hatchRocketBtn = new JoystickButton(stick, 6);
+  public Button liftAutoButtonOne = new JoystickButton(stick, 11);
+  public Button liftAutoButtonTwo = new JoystickButton(stick, 9);
+  // public Button liftAutoButtonThree = new JoystickButton(stick, 10);
 public OI(){
-  pinInBtn.whenPressed(new RetractPinCommand());
-  pinOutBtn.whenPressed(new ExtendPinCommand());
+  // pinInBtn.whenPressed(new RetractPinCommand());
+  // pinOutBtn.whenPressed(new ExtendPinCommand());
   hatchInBtn.whenPressed(new RetractHatchCommand());
   hatchOutBtn.whenPressed(new ExtendHatchCommand());
   hatchRocketBtn.whenPressed(new DropHatchRocketCommandGroup());
-
+  liftAutoButtonOne.whenPressed(new AutoLiftCommand(30));
+  liftAutoButtonTwo.whenPressed(new AutoLiftCommand(56));
+  // liftAutoButtonThree.whenPressed(new AutoliftCommand(-9999);
   }
 }

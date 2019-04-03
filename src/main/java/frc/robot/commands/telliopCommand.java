@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 /**
@@ -55,20 +56,25 @@ public class telliopCommand extends Command {
 
 
     Robot.liftSubsystem.moveLiftMech(Robot.m_oi.stick.getY());
+    if(Robot.m_oi.xbox.getStartButtonPressed()) Robot.liftSubsystem.clearEncoder();
+    SmartDashboard.putNumber("Encoder Counts", Robot.liftSubsystem.getCounts());
+    SmartDashboard.putNumber("Pot Value", Robot.liftSubsystem.Pot.getVoltage());
     if(Robot.m_oi.xbox.getXButtonPressed()) Robot.m_subsystem.shifter.set(Value.kForward);
     if(Robot.m_oi.xbox.getBButtonPressed()) Robot.m_subsystem.shifter.set(Value.kReverse);
+    if(Robot.m_subsystem.shifter.get() == Value.kForward) SmartDashboard.putString("Shift", "Low");
+    else SmartDashboard.putString("Shift", "High");
     double rollerSpeed = 0;
     if (Robot.m_oi.stick.getRawButton(1))
-    rollerSpeed = .8;
+    rollerSpeed = .9;
     else if (Robot.m_oi.stick.getRawButton(2))
-      rollerSpeed = -.8;
+      rollerSpeed = -.9;
     Robot.intakeSubsystem.rollerSpin(rollerSpeed);
 
 
     double armspeed = 0;
-    if (Robot.m_oi.stick.getRawButton(11))
+    if (Robot.m_oi.xbox.getPOV(0)==180)
       armspeed = .25;
-    else if (Robot.m_oi.stick.getRawButton(12))
+    else if (Robot.m_oi.xbox.getPOV(0)==0)
       armspeed = -.2;
     Robot.intakeSubsystem.armMove(armspeed);
 

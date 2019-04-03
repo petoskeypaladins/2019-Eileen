@@ -45,7 +45,7 @@ public class RobotMap {
   public static final int SHIFT_SOLENOID_IN = 7;
   public static final int SHIFT_SOLENOID_PCM = 0;
   //DIO
-  public static final int LIFT_ZERO = 1;
+  public static final int LIFT_ZERO = 0;
 
 
   
