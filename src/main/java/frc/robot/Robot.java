@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.TogglePixy2LampCommand;
+import frc.robot.subsystems.CrawlSubsystem;
 import frc.robot.subsystems.HatchSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LiftSubsystem;
@@ -34,6 +35,7 @@ public class Robot extends TimedRobot {
   public static HatchSubsystem hatchSubsystem = new HatchSubsystem();
   public static LiftSubsystem liftSubsystem = new LiftSubsystem();
   public static IntakeSubsystem intakeSubsystem = new IntakeSubsystem(); 
+  public static CrawlSubsystem crawlSubsystem = new CrawlSubsystem();
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -53,6 +55,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto mode", m_chooser);
     SmartDashboard.putData("Toggle Lamp", new TogglePixy2LampCommand());
     CameraServer.getInstance().startAutomaticCapture();
+    Robot.hatchSubsystem.PinIn();
+    Robot.hatchSubsystem.HatchIn();
   }
 
   /**
@@ -65,6 +69,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    SmartDashboard.putString("It's almost time to go to", "queue");
   }
 
   /**
@@ -119,7 +124,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    // This makes sure that the autonomous stops running when
+    // This makes sure that the aut onomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.

@@ -29,7 +29,7 @@ public class HatchSubsystem extends Subsystem {
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new HatchCommand());
-    
+     
   }
     public void HatchOut() {
       hatch.set(DoubleSolenoid.Value.kForward);

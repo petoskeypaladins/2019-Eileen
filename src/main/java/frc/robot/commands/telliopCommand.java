@@ -58,7 +58,8 @@ public class telliopCommand extends Command {
     Robot.liftSubsystem.moveLiftMech(Robot.m_oi.stick.getY());
     if(Robot.m_oi.xbox.getStartButtonPressed()) Robot.liftSubsystem.clearEncoder();
     SmartDashboard.putNumber("Encoder Counts", Robot.liftSubsystem.getCounts());
-    SmartDashboard.putNumber("Pot Value", Robot.liftSubsystem.Pot.getVoltage());
+    SmartDashboard.putNumber("Pot Value (Volts)", Robot.liftSubsystem.Pot.getVoltage());
+    SmartDashboard.putNumber("Pot Value (Inches)", Robot.liftSubsystem.voltsToInches(Robot.liftSubsystem.Pot.getVoltage()));
     if(Robot.m_oi.xbox.getXButtonPressed()) Robot.m_subsystem.shifter.set(Value.kForward);
     if(Robot.m_oi.xbox.getBButtonPressed()) Robot.m_subsystem.shifter.set(Value.kReverse);
     if(Robot.m_subsystem.shifter.get() == Value.kForward) SmartDashboard.putString("Shift", "Low");
@@ -69,8 +70,14 @@ public class telliopCommand extends Command {
     else if (Robot.m_oi.stick.getRawButton(2))
       rollerSpeed = -.9;
     Robot.intakeSubsystem.rollerSpin(rollerSpeed);
-
-
+    if(Robot.m_oi.xbox.getBumperPressed(Hand.kRight)) {
+      if(Robot.crawlSubsystem.level2Solenoid.get() == Value.kForward) Robot.crawlSubsystem.level2Solenoid.set(Value.kReverse);
+      else Robot.crawlSubsystem.level2Solenoid.set(Value.kForward);
+    }
+    if(Robot.m_oi.xbox.getBumperPressed(Hand.kLeft)) {
+      if(Robot.crawlSubsystem.backLiftSolenoid.get() == Value.kForward) Robot.crawlSubsystem.backLiftSolenoid.set(Value.kReverse);
+      else Robot.crawlSubsystem.backLiftSolenoid.set(Value.kForward);
+    }
     double armspeed = 0;
     if (Robot.m_oi.xbox.getPOV(0)==180)
       armspeed = .25;
